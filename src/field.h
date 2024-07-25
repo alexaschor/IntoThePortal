@@ -552,6 +552,8 @@ private:
     FieldFunction3D *fieldFunction;
     VEC3F functionMin, functionMax;
 
+public:
+
     VEC3F getSamplePoint(Real x, Real y, Real z) const {
         VEC3F gridPointF(x, y, z);
         VEC3F gridResF(xRes, yRes, zRes);
@@ -561,7 +563,6 @@ private:
 
         return samplePoint;
     }
-public:
 
     VirtualGrid3D(uint xRes, uint yRes, uint zRes, VEC3F functionMin, VEC3F functionMax,  FieldFunction3D *fieldFunction):
         fieldFunction(fieldFunction),
@@ -608,7 +609,7 @@ public:
 
 // Hash function for Eigen matrix and vector.
 // From https://wjngkoh.wordpress.com/2015/03/04/c-hash-function-for-eigen-matrix-and-vector/
-template<typename T> struct matrix_hash : unary_function<T, size_t> {
+template<typename T> struct matrix_hash {
     size_t operator()(T const& matrix) const {
         // Note that it is oblivious to the storage order of Eigen matrix (column- or
         // row-major). It will give you the same hash value for two different matrices if they
