@@ -63,6 +63,8 @@ This is the code used to generate the meshes used in all the 3D paper figures.
 The program should compile with `make`. I've built it with `GNU Make x86_64-pc-linux-gnu 4.4.1`, but I don't think my Makefiles use any GNU-specific syntax.
 Before compiling, you'll want to specify your preferred compiler and any flags you might want to enable in `projects/include.mk`.
 
-All code in this repo is written to the C++17 standard. I've verified that it compiles and runs with:
-    - `g++ (GCC) 14.1.1 20240522` (used for the results in the paper)
-    - `clang x86_64-pc-linux-gnu version 17.0.6` (seems to perform identically)
+All code in this repo is written to the C++17 standard. I've verified that it compiles and runs with
+- `g++ (GCC) 14.1.1 20240522` (used for the results in the paper)
+- `clang x86_64-pc-linux-gnu version 17.0.6` (seems to perform identically)
+
+I haven't tested it on Windows or Mac, but I expect it should work just fine. If you have compilation troubles I'm happy to help troubleshoot, feel free to reach out.
