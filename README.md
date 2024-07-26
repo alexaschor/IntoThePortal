@@ -24,38 +24,37 @@ This is the code used to generate the meshes used in all the 3D paper figures.
 
 ### Repo Structure
 ```
-  (root)
-├──  README.md (this file)
-├──  Makefile (main Makefile: calls into the two project Makefiles)
-├──  projects
-│  ├──  include.mk (included in the two project Makefiles; defines compiler and flags)
-│  ├──  main
-│  │  ├──  Makefile
-│  │  ├──  main.cpp (compiles into bin/run; builds Julia set, adds portals, marches)
-│  │  └──  prun.py (calls into bin/run to compute mesh in parallel, then stitches it back together)
-│  └──  sdfGen (lightly modified version of github: christopherbatty/SDFGen)
-├──  src (common code that I share among different projects)
-│  ├──  field.h (provides 3D grid/field representations: caching, interpolation, gradients, etc.)
-│  ├──  julia.h (provides Julia set implementation: shape modulus, portals, etc.)
-│  ├──  MC.h (modified version of github: aparis69/MarchingCubeCpp)
-│  ├──  mesh.h (triangle mesh)
-│  ├──  SETTINGS.h (poorly named: contains debugging/timing/typedef macros)
-│  ├──  triangle.cpp (functions on triangles)
-│  └──  triangle.h
-├──  data.7z (lzma archive: some example input SDFs)
-│  └──  fields
-│     ├──  benchy100.f3d (benchy: 100^3)
-│     ├──  bunny100.f3d  (bunny:  100^3)
-│     ├──  chair100.f3d  (office chair: 100^3)
-│     ├──  hebe100.f3d   (hebe statue: 100^3)
-│     ├──  hebe300.f3d   (hebe statue: 300^3)
-│     └──  tooth100.f3d  (tooth: 100^3)
-├──  bin (compiled executables will end up here)
-│  └── prun (symlink to ../projects/main/prun.py)
-└──  lib (external libraries)
-   ├──  Eigen (Eigen library version 3.3.9)
-   ├──  PerlinNoise (Perlin Noise implementation from github: reputeless/PerlinNoise)
-   └──  Quaternion (quaternion math implementations from github: theodorekim/QUIJIBO)
+[ ] (root)
+ ├── * README.md (this file)
+ ├── * Makefile (main Makefile: calls into the two project Makefiles)
+ ├──[ ] projects
+ │   ├── * include.mk (included in the two project Makefiles; defines compiler and flags)
+ │   ├──[ ] main
+ │   │   ├── * Makefile
+ │   │   ├── * main.cpp (compiles into bin/run; builds Julia set, adds portals, marches)
+ │   │   └── * prun.py (calls into bin/run to compute mesh in parallel, then stitches it back together)
+ │   └──[ ] sdfGen (lightly modified version of github: christopherbatty/SDFGen)
+ ├──[ ] src (common code that I share among different projects)
+ │   ├── * field.h (provides 3D grid/field representations: caching, interpolation, gradients, etc.)
+ │   ├── * julia.h (provides Julia set implementation: shape modulus, portals, etc.)
+ │   ├── * MC.h (modified version of github: aparis69/MarchingCubeCpp)
+ │   ├── * mesh.h (triangle mesh)
+ │   ├── * SETTINGS.h (poorly named: contains debugging/timing/typedef macros)
+ │   ├── * triangle.cpp, .h (functions on triangles)
+ ├──[*] data.7z (lzma archive)
+ │   └──[ ] fields (SDFs for example shapes)
+ │       ├── * benchy100.f3d (benchy: 100^3)
+ │       ├── * bunny100.f3d  (bunny:  100^3)
+ │       ├── * chair100.f3d  (office chair: 100^3)
+ │       ├── * hebe100.f3d   (hebe statue: 100^3)
+ │       ├── * hebe300.f3d   (hebe statue: 300^3)
+ │       └── * tooth100.f3d  (tooth: 100^3)
+ ├──[ ] bin (compiled executables will end up here)
+ │   └── prun (symlink to ../projects/main/prun.py)
+ └──[ ] lib (external libraries)
+     ├──[ ] Eigen (Eigen library version 3.3.9)
+     ├──[ ] PerlinNoise (Perlin Noise implementation from github: reputeless/PerlinNoise)
+     └──[ ] Quaternion (quaternion math implementations from github: theodorekim/QUIJIBO)
 ```
 
 
