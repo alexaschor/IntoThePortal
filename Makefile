@@ -3,7 +3,7 @@ LIBS = Quaternion
 
 include ./projects/include.mk
 
-all: sdfGen main genPoly
+all: sdfGen main
 
 sdfGen:
 	cd projects/sdfGen; make
@@ -11,11 +11,7 @@ sdfGen:
 main:
 	cd projects/main; make
 
-genPoly:
-	cd projects/genPoly; make
-
 clean:
 	@-for d in $(LIBS); do (echo -e "cd ./lib/$$d; rm *.o";cd ./lib/$$d; rm *.o; cd ../..); done
 	cd projects/main; make clean
-	cd projects/genPoly; make clean
 	cd projects/sdfGen; make clean
