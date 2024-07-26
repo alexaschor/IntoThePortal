@@ -18,6 +18,6 @@ Ours is the first algorithm to enable this level of general artistic control whi
 
 ## This Repo
 
-First of all, thanks for coming to this page! If you have any questions or ideas about the paper or code or any problems with building, running or modifying the code, please open an issue here or email me at `alexaschor@gmail.com` and I'll do my best to help. 
+First of all, thanks for coming to this page! If you have any questions or ideas about the paper or code or any problems with building, running or modifying the code, please open an issue here or email me at `alexa.schor@yale.edu` and I'll do my best to help. 
 
 This is the code used to generate the meshes used in most of the paper figures. For an interactive, (mostly) real time 2D version that allows you to play with the parameters, check out https://github.com/alexaschor/JSM2D
