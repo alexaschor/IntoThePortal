@@ -1,4 +1,4 @@
-# *Into the Portal: Directable Fractal Self-Similarity *
+# *Into the Portal: Directable Fractal Self-Similarity*
 
 [![DOI:10.1111/cgf.14905](https://zenodo.org/badge/DOI/10.1145/3641519.3657466.svg)](https://doi.org/10.1145/3641519.3657466)
 
