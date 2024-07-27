@@ -112,8 +112,26 @@ produce the figures in the paper in the lzma archive `data.7z` - extracting it
 will produce a structure as shown above in the **repo structure** diagram.
 
 Specifically, to reproduce the bunny and hebe examples, first extract `data.7z`
-and then run the following:
+and then run the following with either `./bin/prun` or `./bin/run`:
+
+<details open>
+<summary>In up to 8x parallel with `prun` (requires trimesh2 `mesh_cat` and an `xargs` that supports the `-P` flag)</summary>
 - **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
-- **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 200 0.29 8.2 0 0 0 hebe.obj`
+- **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
+</details>
+
+<details open>
+<summary>Single-threaded with `run` (no dependencies)</summary>
+- **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
+- **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
+</details>
+
+These invocations can be understood by comparing with the usage documentation
+below, but for convenience here's a table of the parameters used:
+
+| Parameter     | Value (Bunny)                                    | Value (Hebe)                                     |
+| ------------- |:------------------------------------------------:|:------------------------------------------------:|
+| SDF file      | `data/fields/bunny100.f3d` (100<sup>3</sup> SDF) | `data/fields/hebe300.f3d` (300<sup>3</sup> SDF)  |
+| Portal file   | `data/portals/bunny_ears.txt` (2 portals)        | `data/portals/hebe.txt` (1 portal)               |
 
 
