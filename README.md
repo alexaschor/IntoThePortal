@@ -99,14 +99,21 @@ program is the following:
 1. Start with your target shape mesh as `*.obj`.
 2. Run `bin/sdfGen` on that mesh to produce an SDF in a format that this
    program understands. This will yield a `*.f3d` signed distance field.
-3. Run `bin/run` or `bin/prun` on that signed distance field to produce a
-   self-similar fractal. This will yield an `*.obj` mesh that you can do what
-   you please with.
+3. Write a text file specifying the portal locations you want, if any. The
+   format for this file is documented below.
+4. Run `bin/run` or `bin/prun` on your signed distance field and your portal
+   text file to produce a self-similar fractal. This will yield an `*.obj` mesh
+   that you can do what you please with.
 
 ### Reproducing the paper examples
 
-I've included the `*.f3d` SDFs we used to produce the figures in the paper
-in the lzma archive `data.7z` - extracting it will produce a structure as shown
-above in the **repo structure** diagram.
+I've included the `*.f3d` SDFs and the `*.txt` portal files that we used to
+produce the figures in the paper in the lzma archive `data.7z` - extracting it
+will produce a structure as shown above in the **repo structure** diagram.
+
+Specifically, to reproduce the bunny and hebe examples, first extract `data.7z`
+and then run the following:
+- **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
+- **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 200 0.29 8.2 0 0 0 hebe.obj`
 
 
