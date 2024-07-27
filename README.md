@@ -129,9 +129,16 @@ and then run the following with either `./bin/prun` or `./bin/run`:
 These invocations can be understood by comparing with the usage documentation
 below, but for convenience here's a table of the parameters used:
 
-| Parameter     | Value (Bunny)                                    | Value (Hebe)                                     |
-| ------------- |:------------------------------------------------:|:------------------------------------------------:|
-| SDF file      | `data/fields/bunny100.f3d` (100<sup>3</sup> SDF) | `data/fields/hebe300.f3d` (300<sup>3</sup> SDF)  |
-| Portal file   | `data/portals/bunny_ears.txt` (2 portals)        | `data/portals/hebe.txt` (1 portal)               |
+| Parameter              | Value (Bunny)                                    | Value (Hebe)                                     |
+| ---------------------- | ------------------------------------------------ | ------------------------------------------------ |
+| SDF file               | `data/fields/bunny100.f3d` (100<sup>3</sup> SDF) | `data/fields/hebe300.f3d` (300<sup>3</sup> SDF)  |
+| Portal file            | `data/portals/bunny_ears.txt` (2 portals)        | `data/portals/hebe.txt` (1 portal)               |
+| Versor noise octaves   | `1`                                              | `1`                                              |
+| Versor noise scale     | `9`                                              | `9`                                              |
+| Marching resolution    | `300` (Adjust to taste)                          | `300` (Adjust to taste)                          |
+| Shape modulus alpha    | `10`                                             | `0.29`                                           |
+| Shape modulus beta     | `0.1`                                            | `8.2`                                            |
+| Origin offset          | `0 0 0` (No offset)                              | `0 0 0` (No offset)                              |
+| Output filename        | `bunny.obj`                                      | `hebe.obj`                                       |
 
 
