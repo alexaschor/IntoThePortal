@@ -105,7 +105,7 @@ program is the following:
    text file to produce a self-similar fractal. This will yield an `*.obj` mesh
    that you can do what you please with.
 
-### Reproducing the paper examples
+## Reproducing the paper examples
 
 I've included the `*.f3d` SDFs and the `*.txt` portal files that we used to
 produce the figures in the paper in the lzma archive `data.7z` - extracting it
@@ -114,17 +114,13 @@ will produce a structure as shown above in the **repo structure** diagram.
 Specifically, to reproduce the bunny and hebe examples, first extract `data.7z`
 and then run the following with either `./bin/prun` or `./bin/run`:
 
-<details open>
-<summary>In up to 8x parallel with `prun` (requires trimesh2 `mesh_cat` and an `xargs` that supports the `-P` flag)</summary>
-- **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
-- **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
-</details>
+To run in up to 8x parallel with `prun` (requires trimesh2 `mesh_cat` and an `xargs` that supports the `-P` flag):
+* **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
+* **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
 
-<details open>
-<summary>Single-threaded with `run` (no dependencies)</summary>
-- **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
-- **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
-</details>
+To run single-threaded with `run` (no dependencies):
+* **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
+* **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
 
 These invocations can be understood by comparing with the usage documentation
 below, but for convenience here's a table of the parameters used:
@@ -141,4 +137,21 @@ below, but for convenience here's a table of the parameters used:
 | Origin offset          | `0 0 0` (No offset)                              | `0 0 0` (No offset)                              |
 | Output filename        | `bunny.obj`                                      | `hebe.obj`                                       |
 
+## Portal file syntax
+Consider this example, the portal file for the bunny example:
+```
+Portals radius:      0.25
+Portals scale:       4.50
 
+Portal location:    -0.175255 0.441722 0.015167
+Portal rotation:    0 0 1 0
+
+Portal location:    -0.375654 0.433278 -0.309944
+Portal rotation:    0 0 1 0
+```
+The key names aren't case-sensitive, and the whitespace doesn't have to be aligned. They're read in with a 
+relatively crude `sscanf` loop. The `portals radius` is the size of the "input" portals, and the `portals scale` is the
+ratio of the "output" portal size to the input portal size. This code has a single output portal centered at the origin.
+The radius and scale, as implied by the plural name, are constant for all portals (they don't have to be the same 
+theoretically, that's just how the code is written). After those, you can specify pairs of locations and rotations, 
+with location always coming first. The location is `X Y Z`, and the rotation is an angle-axis `theta X Y Z`.
