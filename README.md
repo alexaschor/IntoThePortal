@@ -83,8 +83,9 @@ any flags you might want to enable in `projects/include.mk`.
 
 All code in this repo is written to the C++17 standard. I've verified that it
 compiles and runs with:
-    - `g++ (GCC) 14.1.1 20240522` (used for the results in the paper)
-    - `clang x86_64-pc-linux-gnu version 17.0.6` (seems to perform identically)
+
+- `g++ (GCC) 14.1.1 20240522` (used for the results in the paper)
+- `clang x86_64-pc-linux-gnu version 17.0.6` (seems to perform identically)
 
 I've tested it on a Dell Latitude 7490 running Arch Linux, but that shouldn't
 really matter. If you have compilation issues, feel free to reach out.
@@ -103,3 +104,9 @@ program is the following:
    you please with.
 
 ### Reproducing the paper examples
+
+I've included the `*.f3d` SDFs we used to produce the figures in the paper
+in the lzma archive `data.7z` - extracting it will produce a structure as shown
+above in the **repo structure** diagram.
+
+

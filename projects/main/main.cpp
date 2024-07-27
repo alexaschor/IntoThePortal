@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
 
     PRINTF("Computing Julia set with resolution %d, a=%f, b=%f, v. octaves=%d, v. scale=%f, offset=(%f, %f, %f)\n", res, alpha, beta, versor_octaves, versor_scale, offset3D.x(), offset3D.y(), offset3D.z());
 
-    NoiseVersor  versor(1, 9);
+    NoiseVersor  versor(versor_octaves, versor_scale);
     ShapeModulus modulus(&distField, alpha, beta);
 
     VersorModulusR3Map vm(&versor, &modulus);
@@ -119,14 +119,51 @@ int main(int argc, char *argv[]) {
     vector<VEC3F> portalCenters;
     vector<AngleAxis<Real>> portalRotations;
 
+    // READ PORTAL FILE
+    Real portalRadius;
+    Real portalScale;
+    VEC3F portalLocation;
+    AngleAxis<Real> portalRotation;
+
+    ifstream portalFile("data/portals/hebe.txt");
+    if (portalFile.is_open()) {
+        string line;
+        while (getline(portalFile, line)) {
+            if (line.length()) {
+                string key = line.substr(0, line.find(":"));
+                string value = line.substr(line.find(":")+1, line.length()-1);
+                transform(key.begin(), key.end(), key.begin(), ::tolower);
+                transform(value.begin(), value.end(), value.begin(), ::tolower);
+                if (key == "portals radius") {
+                    sscanf(value.c_str(), " %lf", &portalRadius);
+                } else if (key == "portals scale") {
+                    sscanf(value.c_str(), " %lf", &portalScale);
+                } else if (key == "portal location") {
+                    Real x,y,z;
+                    sscanf(value.c_str(), " %lf %lf %lf", &x, &y, &z);
+                    portalLocation = VEC3F(x,y,z);
+                } else if (key == "portal rotation") {
+                    Real t,x,y,z;
+                    sscanf(value.c_str(), " %lf %lf %lf %lf", &t, &x, &y, &z);
+                    portalRotation = AngleAxis<Real>(t, VEC3F(x,y,z));
+
+                    portalCenters.push_back(portalLocation);
+                    portalRotations.push_back(portalRotation);
+                }
+            }
+        }
+    }
+    portalFile.close();
+
+
     // FOR BUNNY EARS:
-    portalCenters.push_back(VEC3F(-0.175255, 0.441722, 0.015167));
-    portalRotations.push_back(AngleAxis<Real>(0, VEC3F(0,1,0)));
+    // portalCenters.push_back(VEC3F(-0.175255, 0.441722, 0.015167));
+    // portalRotations.push_back(AngleAxis<Real>(0, VEC3F(0,1,0)));
+    //
+    // portalCenters.push_back(VEC3F(-0.375654, 0.433278, -0.309944));
+    // portalRotations.push_back(AngleAxis<Real>(0, VEC3F(0,1,0)));
 
-    portalCenters.push_back(VEC3F(-0.375654, 0.433278, -0.309944));
-    portalRotations.push_back(AngleAxis<Real>(0, VEC3F(0,1,0)));
-
-    PortalMap  pm(&vm, portalCenters, portalRotations, 0.25, 4.5, &mask_j); //5 for hebe
+    PortalMap  pm(&vm, portalCenters, portalRotations, portalRadius, portalScale, &mask_j);
 
     // FOR HEBE:
     // portalCenters.push_back(VEC3F(0.140000, 0.350699, 0.126944));
