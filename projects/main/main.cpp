@@ -15,11 +15,11 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    if(argc != 11 && argc != 12) {
+    if(argc != 12 && argc != 13) {
         cout << "USAGE: " << endl;
         cout << "To create a shaped julia set from a distance field:" << endl;
-        cout << " " << argv[0] << " <SDF *.f3d> <versor octaves> <versor scale> <output resolution> <alpha> <beta> <offset x> <offset y> <offset z> <output *.obj> <optional: octree specifier string>" << endl << endl;
-        //                            argv[1]        argv[2]          argv[3]        argv[4]        argv[5] argv[6]  argv[7]    argv[8]   argv[9]      argv[10]               argv[11]
+        cout << " " << argv[0] << " <SDF *.f3d> <portals *.txt> <versor octaves> <versor scale> <output resolution> <alpha> <beta> <offset x> <offset y> <offset z> <output *.obj> <optional: octree specifier string>" << endl << endl;
+        //                            argv[1]        argv[2]        argv[3]          argv[4]        argv[5]        argv[6] argv[7]  argv[8]    argv[9]   argv[10]      argv[11]               argv[12]
 
         cout << "    This will compute the 3D Julia quaternion Julia set of the function:" << endl;
         cout << "        f(q) = r(q) * d(q)" << endl;
@@ -71,21 +71,21 @@ int main(int argc, char *argv[]) {
     distField.mapBox.max() = VEC3F(0.5, 0.5, 0.5);
 
     // Now we actually compute the Julia set
-    Real alpha = atof(argv[5]);
-    Real beta = atof(argv[6]);
+    Real alpha = atof(argv[6]);
+    Real beta = atof(argv[7]);
 
     // Offset roots and distance field to reproduce QUIJIBO dissolution
     // effect - this is optional, and for all our results in the paper was zero.
-    VEC3F offset3D(atof(argv[7]), atof(argv[8]), atof(argv[9]));
+    VEC3F offset3D(atof(argv[8]), atof(argv[9]), atof(argv[10]));
 
     distField.mapBox.setCenter(offset3D);
 
-    int res = atoi(argv[4]);
+    int res = atoi(argv[5]);
 
     // Set up simulation bounds, taking octree zoom into account
     AABB boundsBox(distField.mapBox.min(), distField.mapBox.max() + VEC3F(0.25, 0.25, 0.25));
-    if (argc == 12) { // If an octree specifier string was given, we zoom in on just one box
-        char* octreeStr = argv[11];
+    if (argc == 13) { // If an octree specifier string was given, we zoom in on just one box
+        char* octreeStr = argv[12];
 
         for (size_t i = 0; i < strlen(octreeStr); ++i) {
             int oIdx = octreeStr[i] - '0';
@@ -103,10 +103,10 @@ int main(int argc, char *argv[]) {
         boundsBox.min() -= delta;
     }
 
-    int versor_octaves = atoi(argv[2]);
-    Real versor_scale   = atof(argv[3]);
+    int versor_octaves = atoi(argv[3]);
+    Real versor_scale   = atof(argv[4]);
 
-    PRINTF("vo=%s; vs=%s\n",argv[2], argv[3]);
+    PRINTF("vo=%s; vs=%s\n",argv[3], argv[4]);
 
     PRINTF("Computing Julia set with resolution %d, a=%f, b=%f, v. octaves=%d, v. scale=%f, offset=(%f, %f, %f)\n", res, alpha, beta, versor_octaves, versor_scale, offset3D.x(), offset3D.y(), offset3D.z());
 
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
     VEC3F portalLocation;
     AngleAxis<Real> portalRotation;
 
-    ifstream portalFile("data/portals/hebe.txt");
+    ifstream portalFile(argv[2]);
     if (portalFile.is_open()) {
         string line;
         while (getline(portalFile, line)) {
@@ -186,7 +186,7 @@ int main(int argc, char *argv[]) {
         m.vertices[i] = vg.gridToFieldCoords(v);
     }
 
-    m.writeOBJ(argv[10]);
+    m.writeOBJ(argv[11]);
 
     return 0;
 }
