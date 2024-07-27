@@ -19,24 +19,25 @@ if sys.argv[1] == "SUB":
     subsection = sys.argv[2]
     sys.argv = [sys.argv[0]] + sys.argv[3:]
 
-if len(sys.argv) != 10:
+if len(sys.argv) != 11:
     print("USAGE:")
     print("To create a shaped julia set from a distance field:")
-    print(f" {sys.argv[0]} <SDF *.f3d> <P(q) *.poly4d, or the word RANDOM> <output resolution> <a> <b> <offset x> <offset y> <offset z> <output *.obj>")
+    print(f" {sys.argv[0]} <SDF *.f3d> <versor octaves> <versor scale> <output resolution> <a> <b> <offset x> <offset y> <offset z> <output *.obj>")
     print("This will pass all the parameters along to ./bin/run and run it in "+ str(NUM_PARALLEL_JOBS)+"X parallel")
     exit(1)
 
 sdf = sys.argv[1]
-p4d = sys.argv[2]
-out_res = int(sys.argv[3])
-a = sys.argv[4]
-b = sys.argv[5]
-ox = sys.argv[6]
-oy = sys.argv[7]
-oz = sys.argv[8]
-out_obj = sys.argv[9]
+vo = sys.argv[2]
+vs = sys.argv[3]
+out_res = int(sys.argv[4])
+a = sys.argv[5]
+b = sys.argv[6]
+ox = sys.argv[7]
+oy = sys.argv[8]
+oz = sys.argv[9]
+out_obj = sys.argv[10]
 
-params = [sdf, p4d, str(int(out_res / 2)), a, b, ox, oy, oz, out_obj]
+params = [sdf, vo, vs, str(int(out_res / 2)), a, b, ox, oy, oz, out_obj]
 
 generate_command = "seq 0 7 | xargs -P" + str(NUM_PARALLEL_JOBS) + " -I{} ./bin/run " + " ".join(params) +  ".{}.obj " + subsection + "{}"
 cat_command      = f"mesh_cat {out_obj}.*.obj -o {out_obj}"
