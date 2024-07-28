@@ -10,7 +10,7 @@ import os
 
 def die_usage():
     print("USAGE:")
-    print("To create a shaped julia set from a distance field:")
+    print("To create a self-similar Julia set from a distance field:")
     print(f" {sys.argv[0]} <SDF *.f3d> <portals *.txt> <versor octaves> <versor scale> <output resolution> <a> <b> <offset x> <offset y> <offset z> <output *.obj>")
     print("")
     print("This will pass all the parameters along to ./bin/run and run it in "+ str(NUM_PARALLEL_JOBS)+"X parallel.")

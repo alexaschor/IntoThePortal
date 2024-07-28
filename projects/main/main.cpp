@@ -17,19 +17,14 @@ using namespace std;
 int main(int argc, char *argv[]) {
     if(argc != 12 && argc != 13) {
         cout << "USAGE: " << endl;
-        cout << "To create a shaped julia set from a distance field:" << endl;
+        cout << "To create a self-similar Julia set from a distance field and portal description file:" << endl;
         cout << " " << argv[0] << " <SDF *.f3d> <portals *.txt> <versor octaves> <versor scale> <output resolution> <alpha> <beta> <offset x> <offset y> <offset z> <output *.obj> <optional: octree specifier string>" << endl << endl;
         //                            argv[1]        argv[2]        argv[3]          argv[4]        argv[5]        argv[6] argv[7]  argv[8]    argv[9]   argv[10]      argv[11]               argv[12]
 
-        cout << "    This will compute the 3D Julia quaternion Julia set of the function:" << endl;
-        cout << "        f(q) = r(q) * d(q)" << endl;
-        cout << "    Where:" << endl;
-        cout << "        r(q) = e^( a * SDF(q) + b )" << endl;
-        cout << "        d(q) = Normalized( P(q) )" << endl << endl;
+        cout << "    This will generate a shape modulus Julia set using the SDF that you provide and Perlin noise for the versor field." << endl;
 
-        cout << "    P(q) is the quaternion polynomial function, which determines the character of the fractal detail." << endl;
-        cout << "    a is a parameter which controls the thickness of the shell in which the chaotic effect has significant influence" << endl;
-        cout << "    on set membership, and b is a parameter which controls the position along the surface of the SDF of that shell." << endl << endl;
+        cout << "    Alpha is a parameter which controls the thickness of the shell in which the chaotic effect has significant influence" << endl;
+        cout << "    on set membership, and beta is a parameter which controls the position along the SDF where the shell appears." << endl << endl;
 
         cout << "    The offset X, Y, and Z parameters move the origin of the dynamical system around in space, which causes" << endl;
         cout << "    the Julia set to dissolve in interesting ways." << endl;
