@@ -71,6 +71,14 @@ This is the code used to generate the meshes used in all the 3D paper figures.
      └──[ ] Quaternion (quaternion math implementations from github: theodorekim/QUIJIBO)
 ```
 
+### Code Acknowledgements 
+As noted above in the **Repo Structure** section, this project incorporates code from:
+- [christopherbatty/SDFGen](https://github.com/christopherbatty/SDFGen) in `projects/sdfGen`
+- [aparis69/MarchingCubeCpp](https://github.com/aparis69/MarchingCubeCpp) in `src/MC.h`
+- [reputeless/PerlinNoise](https://github.com/reputeless/PerlinNoise) in `lib/PerlinNoise`
+- [theodorekim/QUIJIBO](https://github.com/theodorekim/QUIJIBO) in `lib/Quaternion`
+- [Eigen](https://eigen.tuxfamily.org/) in `lib/Eigen` 
+
 
 ## Compiling
 
