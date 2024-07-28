@@ -171,21 +171,21 @@ The following documentation is also produced when running the executables in `./
 ```
 > ./bin/run
 USAGE:
-To create a self-similar Julia set from a distance field and portal description file:
- ./bin/run <SDF *.f3d> <portals *.txt> <versor octaves> <versor scale> <output resolution> <alpha> <beta> <offset x> <offset y> <offset z> <output *.obj> <optional: octree specifier string>
+To create a self-similar Julia set from a distance field and portal description
+file:
+    ./bin/run <SDF *.f3d> <portals *.txt> <versor octaves> <versor scale> <output resolution> <alpha> <beta> <offset x> <offset y> <offset z> <output *.obj> <optional: octree specifier string>
 
-    This will generate a shape modulus Julia set using the SDF that you provide
-    and Perlin noise for the versor field. Alpha is a parameter which controls
-    the thickness of the shell in which the chaotic effect has significant
-    influence on set membership, and beta is a parameter which controls the
-    position along the SDF where the shell appears.
+This will generate a shape modulus Julia set using the SDF that you provide and
+Perlin noise for the versor field. Alpha is a parameter which controls the
+thickness of the shell in which the chaotic effect has significant influence on
+set membership, and beta is a parameter which controls the position along the
+SDF where the shell appears.
 
-    The offset X, Y, and Z parameters move the origin of the dynamical system
-    around in space, which causes the Julia set to dissolve in interesting
-    ways. The octree specifier string is an optional parameter useful for
-    computing large Julia sets in parallel. You can select a box in an
-    evenly-subdivided octree of arbitrary depth specified by a string of digits
-    0-7, laid out as follows:
+The offset X, Y, and Z parameters move the origin of the dynamical system
+around in space, which causes the Julia set to dissolve in interesting ways.
+The octree specifier string is an optional parameter useful for computing large
+Julia sets in parallel. You can select a box in an evenly-subdivided octree of
+arbitrary depth specified by a string of digits 0-7, laid out as follows:
                  +---+
                / |4|5|
               /  +-+-+
@@ -200,8 +200,8 @@ To create a self-similar Julia set from a distance field and portal description 
         Y X--▶
         Z ●
         (into page)
-    Each character of the string will go one level deeper, so the string '5555'
-    specifies the 1/16-edge length box at the far back corner.
+Each character of the string will go one level deeper, so the string '5555'
+specifies the 1/16-edge length box at the far back corner.
 ```
 
 ```
