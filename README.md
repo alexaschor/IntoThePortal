@@ -114,7 +114,7 @@ will produce a structure as shown above in the **repo structure** diagram.
 Specifically, to reproduce the bunny and hebe examples, first extract `data.7z`
 and then run the following with either `./bin/prun` or `./bin/run`:
 
-To run in up to 8x parallel with `prun` (requires trimesh2 `mesh_cat` and an `xargs` that supports the `-P` flag):
+To run in up to 8x parallel with `prun` (requires [trimesh2](https://gfx.cs.princeton.edu/proj/trimesh2/)'s `mesh_cat` and an `xargs` that supports the `-P` flag):
 * **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
 * **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
 
@@ -138,7 +138,7 @@ below, but for convenience here's a table of the parameters used:
 | Output filename        | `bunny.obj`                                      | `hebe.obj`                                       |
 
 ### Portal file syntax
-Consider this example, the portal file for the bunny example:
+Consider this example, the portal file for the bunny in the paper:
 ```
 Portals radius:      0.25
 Portals scale:       4.50
