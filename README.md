@@ -168,6 +168,8 @@ Some notes:
 
 ### Invocations
 The following documentation is also produced when running the executables in `./bin/` with no arguments after compilation, but they're reproduced here for convenience:
+
+#### run
 ```
 > ./bin/run
 USAGE:
@@ -204,6 +206,7 @@ Each character of the string will go one level deeper, so the string '5555'
 specifies the 1/16-edge length box at the far back corner.
 ```
 
+#### prun
 ```
 > ./bin/prun
 USAGE:
@@ -237,6 +240,7 @@ An important note is that if you want to use both of these directives, they
 must be used in the order KEEP SUB, e.g. './bin/run KEEP SUB 123 <sdf.f3d> ...'
 ```
 
+#### sdfGen
 ```
 > ./bin/sdfGen
 USAGE:
