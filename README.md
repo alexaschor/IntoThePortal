@@ -20,7 +20,8 @@ See turntable and zoom videos of our results here:
 _Abstract:_ We present a novel, directable method for introducing fractal
 self-similarity into arbitrary shapes. Our method allows a user to directly
 specify the locations of self-similarities in a Julia set and is general enough
-to reproduce other well-known fractals such as the Koch snowflake. Ours is the first algorithm to enable this level of general artistic control
+to reproduce other well-known fractals such as the Koch snowflake. Ours is the 
+first algorithm to enable this level of general artistic control
 while also maintaining the character of the original fractal shape. We
 introduce the notion of placing “portals” into the iteration space of a
 dynamical system, bridging the aesthetics of iterated maps with the
@@ -80,15 +81,16 @@ syntax. Before compiling, you'll want to specify your preferred compiler and
 any flags you might want to enable in `projects/include.mk`.
 
 All code in this repo is written to the C++17 standard. I've verified that it
-compiles and runs with:
+compiles and runs on my Linux machine with:
 
 - `g++ (GCC) 14.1.1 20240522` (used for the results in the paper)
 - `clang x86_64-pc-linux-gnu version 17.0.6` (seems to perform identically)
 
-I've tested it on a Dell Latitude 7490 running Arch Linux, but that shouldn't
-really matter. If you have compilation issues, feel free to reach out.
+If you have compilation issues, feel free to reach out.
 
 ## Usage
+
+### General usage
 
 Running `make` should yield two executables in `bin`: `bin/run` and
 `bin/sdfGen`. The pipeline for producing self-similar fractals with this
@@ -103,7 +105,7 @@ program is the following:
    text file to produce a self-similar fractal. This will yield an `*.obj` mesh
    that you can do what you please with.
 
-## Reproducing the paper examples
+### Reproducing the paper examples
 
 I've included the `*.f3d` SDFs and the `*.txt` portal files that we used to
 produce the figures in the paper in the lzma archive `data.7z` - extracting it
@@ -135,7 +137,7 @@ below, but for convenience here's a table of the parameters used:
 | Origin offset          | `0 0 0` (No offset)                              | `0 0 0` (No offset)                              |
 | Output filename        | `bunny.obj`                                      | `hebe.obj`                                       |
 
-## Portal file syntax
+### Portal file syntax
 Consider this example, the portal file for the bunny example:
 ```
 Portals radius:      0.25
@@ -163,3 +165,72 @@ Some notes:
 - Individual portals are specified with a location and rotation, with location
   always coming first. The location is `X Y Z`, and the rotation is an
   angle-axis `theta X Y Z`.
+
+### Invocations
+The following documentation is also produced when running the executables in `./bin/` with no arguments after compilation, but they're reproduced here for convenience:
+```
+> ./bin/run
+USAGE: 
+To create a self-similar Julia set from a distance field and portal description file:
+ ./bin/run <SDF *.f3d> <portals *.txt> <versor octaves> <versor scale> <output resolution> <alpha> <beta> <offset x> <offset y> <offset z> <output *.obj> <optional: octree specifier string>
+
+    This will generate a shape modulus Julia set using the SDF that you provide and Perlin noise for the versor field.
+    Alpha is a parameter which controls the thickness of the shell in which the chaotic effect has significant influence
+    on set membership, and beta is a parameter which controls the position along the SDF where the shell appears.
+
+    The offset X, Y, and Z parameters move the origin of the dynamical system around in space, which causes
+    the Julia set to dissolve in interesting ways.
+    The octree specifier string is an optional parameter useful for computing large Julia sets in parallel.
+    You can select a box in an evenly-subdivided octree of arbitrary depth specified by a string of digits 0-7,
+    laid out as follows:
+                 +---+
+               / |4|5|
+              /  +-+-+
+             /   |7|6|
+            /    +---+
+           +---+    / 
+           |0|1|   /  
+           +-+-+  /   
+           |3|2| /    
+        ▲  +---+      
+        |             
+        Y X--▶        
+        Z ●           
+        (into page)   
+    Each character of the string will go one level deeper, so the string '5555' specifies the 1/16-edge length box at the far back corner.
+```
+
+```
+> ./bin/prun
+USAGE:
+To create a self-similar Julia set from a distance field:
+ ./bin/prun <SDF *.f3d> <portals *.txt> <versor octaves> <versor scale> <output resolution> <a> <b> <offset x> <offset y> <offset z> <output *.obj>
+
+This will pass all the parameters along to ./bin/run and run it in 8X parallel.
+
+NOTE: This script depends on two programs being available in your $PATH:
+    - mesh_cat, from trimesh2 (https://gfx.cs.princeton.edu/proj/trimesh2/) to stitch the meshes together
+    - an xargs implementation that supports the -P flag (e.g. from findutils, most implementations support this)
+
+Optionally, you can insert two directives before the rest of the parameters:
+    - 'KEEP' with no arguments, e.g. './bin/prun KEEP <sdf.f3d> ...'
+    - 'SUB' with one argument, e.g. './bin/prun SUB 001 <sdf.f3d> ...'
+
+KEEP will still stitch the meshes together that each job produced, but it will not clean them up afterwards, so you'll end up with your output.obj as well as e.g. output.1.obj, output.2.obj, etc.
+
+SUB will run as normal, but it will confine the whole process to an octree sub-section. So normally, it's computing the entire mesh in 8x parallel, but if you run it with SUB 1 it'll compute just octree node #1 in 8x parallel. These nest as with ./bin/run, see the usage notes for that executable for a description of the octree layout and labeling. This option does support multiple nesting, so SUB 123 will compute a 1/128th size region.
+
+An important note is that if you want to use both of these directives, they must be used in the order KEEP SUB, e.g. './bin/run KEEP SUB 123 <sdf.f3d> ...'
+```
+
+```
+> ./bin/sdfGen
+USAGE: 
+To generate an SDF from a mesh with automatically generated bounds:
+ ./bin/sdfGen <*.obj input> <resolution> <*.f3d output> <padding cells>
+To get the bounds for a mesh sequence:
+ ./bin/sdfGen BOUNDS <obj 1> <obj 2> ... <obj N>
+To generate an SDF from a mesh with specified bounds:
+ ./bin/sdfGen <*.obj input> <resolution> <*.f3d output> <min X> <min Y> <min Z> <max X> <max Y> <max Z>
+```
+  
