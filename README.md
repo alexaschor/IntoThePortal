@@ -54,7 +54,7 @@ This is the code used to generate the meshes used in all the 3D paper figures.
  │   ├── * MC.h (modified version of github: aparis69/MarchingCubeCpp)
  │   ├── * mesh.h (triangle mesh)
  │   ├── * SETTINGS.h (poorly named: contains debugging/timing/typedef macros)
- │   ├── * triangle.cpp, .h (functions on triangles)
+ │   └── * triangle.cpp, .h (functions on triangles)
  ├──[X] data.7z (lzma archive)
  │   └──[ ] fields (SDFs for example shapes)
  │       ├── * benchy100.f3d (benchy: 100^3)
@@ -148,9 +148,18 @@ Portal location:    -0.375654 0.433278 -0.309944
 Portal rotation:    0 0 1 0
 ```
 Some notes:
-- The key names aren't case-sensitive, and the whitespace doesn't have to be aligned or even - it's all read in with a 
-relatively crude `sscanf` loop. This makes it a little fragile, but it suffices for its simple purpose, which is allowing
-portal parameter changes without recompiling. 
-- `Portals radius` is the radius of the spherical input portals, and `Portals scale` is the ratio between the output portal size and the input portal size.
-- The `Portals radius` and `Portals scale` parameters apply to all portals - so this code supports portals only all of the same size and scale.  The code also hard-codes the "output" portal (shown with blue outline in paper) to be centered at the origin. Neither of these are theoretical limits, and it should be pretty straightforward to change the code to support changing these if you so desire.
-- Individual portals are specified with a location and rotation, with location always coming first. The location is `X Y Z`, and the rotation is an angle-axis `theta X Y Z`.
+- The key names aren't case-sensitive, and the whitespace doesn't have to be
+  aligned or even - it's all read in with a relatively crude `sscanf` loop.
+  This makes it a little fragile, but it suffices for its simple purpose, which
+  is allowing portal parameter changes without recompiling.
+- `Portals radius` is the radius of the spherical input portals, and `Portals
+  scale` is the ratio between the output portal size and the input portal size.
+- The `Portals radius` and `Portals scale` parameters apply to all portals - so
+  this code supports portals only all of the same size and scale.  The code
+  also hard-codes the "output" portal (shown with blue outline in paper) to be
+  centered at the origin. Neither of these are theoretical limits, and it
+  should be pretty straightforward to change the code to support changing these
+  if you so desire.
+- Individual portals are specified with a location and rotation, with location
+  always coming first. The location is `X Y Z`, and the rotation is an
+  angle-axis `theta X Y Z`.
