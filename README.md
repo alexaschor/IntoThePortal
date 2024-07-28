@@ -236,7 +236,7 @@ description of the octree layout and labeling. This option does support
 multiple nesting, so SUB 123 will compute a 1/128th size region.
 
 An important note is that if you want to use both of these directives, they
-must be used in the order KEEP SUB, e.g. './bin/run KEEP SUB 123 <sdf.f3d> ...'
+must be used in the order KEEP SUB, e.g. './bin/prun KEEP SUB 123 <sdf.f3d> ...'
 ```
 
 #### sdfGen
