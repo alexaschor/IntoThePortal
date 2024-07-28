@@ -144,6 +144,12 @@ below, but for convenience here's a table of the parameters used:
 | Origin offset          | `0 0 0` (No offset)                              | `0 0 0` (No offset)                              |
 | Output filename        | `bunny.obj`                                      | `hebe.obj`                                       |
 
+The difference in alpha and beta parameters between the two meshes, even
+though the nature of the fractal detail that appears is very similar, is
+due to the difference in size between the two target surfaces. If you 
+scaled down the statue to be the size of the bunny, the parameters would
+be much more similar (though not exactly the same).
+
 ### Portal file syntax
 Consider this example, the portal file for the bunny in the paper:
 ```
