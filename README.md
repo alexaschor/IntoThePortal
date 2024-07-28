@@ -20,9 +20,7 @@ See turntable and zoom videos of our results here:
 _Abstract:_ We present a novel, directable method for introducing fractal
 self-similarity into arbitrary shapes. Our method allows a user to directly
 specify the locations of self-similarities in a Julia set and is general enough
-to reproduce other well-known fractals such as the Koch snowflake.
-
-Ours is the first algorithm to enable this level of general artistic control
+to reproduce other well-known fractals such as the Koch snowflake. Ours is the first algorithm to enable this level of general artistic control
 while also maintaining the character of the original fractal shape. We
 introduce the notion of placing “portals” into the iteration space of a
 dynamical system, bridging the aesthetics of iterated maps with the
@@ -149,9 +147,10 @@ Portal rotation:    0 0 1 0
 Portal location:    -0.375654 0.433278 -0.309944
 Portal rotation:    0 0 1 0
 ```
-The key names aren't case-sensitive, and the whitespace doesn't have to be aligned. They're read in with a 
-relatively crude `sscanf` loop. The `portals radius` is the size of the "input" portals, and the `portals scale` is the
-ratio of the "output" portal size to the input portal size. This code has a single output portal centered at the origin.
-The radius and scale, as implied by the plural name, are constant for all portals (they don't have to be the same 
-theoretically, that's just how the code is written). After those, you can specify pairs of locations and rotations, 
-with location always coming first. The location is `X Y Z`, and the rotation is an angle-axis `theta X Y Z`.
+Some notes:
+- The key names aren't case-sensitive, and the whitespace doesn't have to be aligned or even - it's all read in with a 
+relatively crude `sscanf` loop. This makes it a little fragile, but it suffices for its simple purpose, which is allowing
+portal parameter changes without recompiling. 
+- `Portals radius` is the radius of the spherical input portals, and `Portals scale` is the ratio between the output portal size and the input portal size.
+- The `Portals radius` and `Portals scale` parameters apply to all portals - so this code supports portals only all of the same size and scale.  The code also hard-codes the "output" portal (shown with blue outline in paper) to be centered at the origin. Neither of these are theoretical limits, and it should be pretty straightforward to change the code to support changing these if you so desire.
+- Individual portals are specified with a location and rotation, with location always coming first. The location is `X Y Z`, and the rotation is an angle-axis `theta X Y Z`.
