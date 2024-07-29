@@ -37,6 +37,11 @@ modifying the code, please open an issue here or email me at
 
 This is the code used to generate the meshes used in all the 3D paper figures.
 
+### Data Release
+To access `*.obj` meshes of our results, head to the 
+[Releases section](https://github.com/alexaschor/IntoThePortal/releases/tag/data-release)
+for this repo.
+
 ### Repo Structure
 ```
 [ ] (root)
