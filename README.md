@@ -131,8 +131,8 @@ To run in up to 8x parallel with `prun` (requires [trimesh2](https://gfx.cs.prin
 * **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
 
 To run single-threaded with `run` (no dependencies):
-* **Bunny**: `./bin/prun data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
-* **Hebe**: `./bin/prun data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
+* **Bunny**: `./bin/run data/fields/bunny100.f3d data/portals/bunny_ears.txt 1 9 300 10 0.1 0 0 0 bunny.obj`
+* **Hebe**: `./bin/run data/fields/hebe300.f3d data/portals/hebe.txt 1 9 300 0.29 8.2 0 0 0 hebe.obj`
 
 These invocations can be understood by comparing with the usage documentation
 below, but for convenience here's a table of the parameters used:
